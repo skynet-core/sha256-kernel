@@ -101,7 +101,7 @@ constant word K[BLOCK_SIZE] = {
 constant word H[8] = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
                       0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19};
 
-#define ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, x)   \
+#define ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, x)         \
   temp1 = h + EP1(e) + CHOICE(e, f, g) + K[x] + msg_sched[x];                  \
   temp2 = EP0(a) + MAJOR(a, b, c);                                             \
   h = g;                                                                       \
@@ -124,70 +124,70 @@ constant word H[8] = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
   word h = hash[7];                                                            \
   word temp1 = 0;                                                              \
   word temp2 = 0;                                                              \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 0)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 1)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 2)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 3)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 4)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 5)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 6)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 7)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 8)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 9)         \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 10)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 11)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 12)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 13)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 14)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 15)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 16)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 17)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 18)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 19)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 20)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 21)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 22)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 23)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 24)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 25)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 26)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 27)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 28)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 29)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 30)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 31)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 32)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 33)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 34)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 35)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 36)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 37)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 38)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 39)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 40)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 41)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 42)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 43)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 44)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 45)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 46)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 47)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 48)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 49)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 50)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 51)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 52)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 53)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 54)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 55)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 56)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 57)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 58)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 59)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 60)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 61)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 62)        \
-  ROUND_STEP(hash, msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 63)        \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 0)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 1)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 2)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 3)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 4)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 5)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 6)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 7)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 8)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 9)               \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 10)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 11)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 12)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 13)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 14)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 15)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 16)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 17)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 18)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 19)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 20)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 21)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 22)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 23)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 24)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 25)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 26)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 27)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 28)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 29)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 30)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 31)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 32)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 33)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 34)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 35)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 36)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 37)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 38)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 39)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 40)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 41)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 42)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 43)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 44)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 45)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 46)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 47)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 48)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 49)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 50)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 51)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 52)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 53)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 54)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 55)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 56)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 57)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 58)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 59)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 60)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 61)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 62)              \
+  ROUND_STEP(msg_sched, a, b, c, d, e, f, g, h, temp1, temp2, 63)              \
   hash[0] += a;                                                                \
   hash[1] += b;                                                                \
   hash[2] += c;                                                                \
